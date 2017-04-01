@@ -69,13 +69,6 @@ namespace PetsOwners.Controllers
 
  
     }
-    public class OwnersRespondData
-    {
-        public int countOfPages;
-        public int itemsOnPage;
-        public int currentPage;
-        public int ownersCount;
-        public IEnumerable<OwnerView> list;
-    }
+
   
 }

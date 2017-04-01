@@ -287,6 +287,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\PetsOwnersRepository.cs" />
     <Compile Include="Repositories\RepositoryHelper.cs" />
+    <Compile Include="RespondData\OwnerRespond.cs" />
     <Compile Include="Util\NinjectDependencyResolver.cs" />
   </ItemGroup>
   <ItemGroup>

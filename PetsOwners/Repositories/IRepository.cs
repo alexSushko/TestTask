@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PetsOwners.Models;
+using PetsOwners.RespondData;
 namespace PetsOwners.Repositories
 {
     public interface IRepository
@@ -16,10 +17,10 @@ namespace PetsOwners.Repositories
         Owner GetOwner(int id);
         int GetOwnerPageCount(int itemsOnPageCount);
         int GetOwnerPageCount(IEnumerable<Owner> owners, int itemsOnPageCount);
-        IEnumerable<Owner> GetOwners();
+        IEnumerable<OwnersRespondData> GetOwners();
 
-        IEnumerable<Owner> GetOwners(int page, int items, string filter="Id-Down");
-        IEnumerable<Owner> FindOwners(string name, int page, int items, string filter="Id-Down");
+        IEnumerable<OwnersRespondData> GetOwners(int page, int items, string filter="Id-Down");
+        IEnumerable<OwnersRespondData> FindOwners(string name, int page, int items, string filter="Id-Down");
         int OwnersCount();
 
         //Pets
