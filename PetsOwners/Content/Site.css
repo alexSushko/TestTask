@@ -18,3 +18,9 @@ textarea {
 .filter {
     cursor:pointer;
 }
+.highLight {
+    color:red;
+}
+.search-block{
+    color:#626262;
+}

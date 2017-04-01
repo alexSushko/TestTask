@@ -1,7 +1,6 @@
-﻿<input type="text"  ng-model="ownerName" ng-model-options="{ debounce: 250 }"><input type="button" ng-click="addOwner()" />
+﻿<input type="text"  ng-model="ownerName" ng-model-options="{ debounce: 250 }" ng-change="highLight()"><input type="button" ng-click="addOwner()" />
 
 {{errors}}
-
 <table class="table">
     <tr>
         <th ng-click="filtering('Name')" class="filter">Name <i class="glyphicon" ng-class="filterArrow('Name')"></i></th>
@@ -9,7 +8,8 @@
         <th></th>
     </tr>
     <tr ng-repeat="owner in owners">
-        <td>{{owner.Name}}</td>
+        <td ng-bind-html="owner.Name|highLight:ownerName" ></td>
+        
         <td>{{owner.PetsCount}}</td>
         <td><button class="button">Delete</button></td>
     </tr>

@@ -1,6 +1,6 @@
 ﻿var app;
 (function () {
-    app = angular.module("app", ['ngRoute', 'ui.bootstrap','angular-loading-bar']);
+    app = angular.module("app", ['ngRoute', 'ui.bootstrap', 'angular-loading-bar','ngSanitize']);
     /* Config */
     
 

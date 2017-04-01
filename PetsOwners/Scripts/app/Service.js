@@ -34,3 +34,25 @@
 
    
 }); 
+app.service("POHelperService", function ($http) {
+
+});
+app.filter('highLight', function ($sce) {
+    return function (input, highliteWord) {
+        console.log(input);
+        var input = input || '';
+        console.log(input);
+        var tag = '<span class="highLight">';
+        var closetag = '</span>';
+        var result = input;
+        if (highliteWord != '' && input.includes(highliteWord)) {
+
+            result = result.replace(RegExp(highliteWord,'g'), tag + highliteWord + closetag);
+        }
+       
+        return $sce.trustAsHtml(result);
+
+    };
+});
+
+    

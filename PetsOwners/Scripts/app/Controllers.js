@@ -18,7 +18,7 @@
             });
     }]);
 
-app.controller('ownersController', function ($scope, APIService) {
+app.controller('ownersController', function ($scope, APIService, POHelperService) {
     //Initialize
     $scope.currentPage = 1;
     $scope.itemsOnPage = 3;
@@ -68,6 +68,7 @@ app.controller('ownersController', function ($scope, APIService) {
         }
         return errors;
     }
+
     //$scope.saveOwner = function () {
     //    var owner = {
     //        Name: $scope.ownername,
@@ -113,6 +114,8 @@ app.controller('ownersController', function ($scope, APIService) {
             return '';
         }
     }
+
+
 
     
 
