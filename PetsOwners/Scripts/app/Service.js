@@ -16,14 +16,14 @@
     },
     this.addOwner = function (owner) {
         return $http({
-            method: 'put',
-            data: { Id: 0, Name: owner, },
+            method: 'post',
+            data: { Id: 0, Name: owner,Pets:[] },
             url: '/api/owner/'
         })
     },
     this.deleteOwner = function (id) {
         return $http({
-            method: 'post',
+            method: 'delete',
             data: id,
             url: '/api/owner/'
         })
@@ -32,16 +32,14 @@
     //Pets
 
 
-   
+    
 }); 
 app.service("POHelperService", function ($http) {
 
 });
 app.filter('highLight', function ($sce) {
     return function (input, highliteWord) {
-        console.log(input);
         var input = input || '';
-        console.log(input);
         var tag = '<span class="highLight">';
         var closetag = '</span>';
         var result = input;

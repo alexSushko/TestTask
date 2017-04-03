@@ -11,7 +11,7 @@
         <td ng-bind-html="owner.Name|highLight:ownerName" ></td>
         
         <td>{{owner.PetsCount}}</td>
-        <td><button class="button">Delete</button></td>
+        <td><button class="button" ng-click="deleteOwner(owner.Id)">Delete</button></td>
     </tr>
 </table>
 <ul uib-pagination total-items="ownersCount" items-per-page="itemsOnPage" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-links="true" num-pages="countOfPages"></ul>

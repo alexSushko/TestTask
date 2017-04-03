@@ -8,7 +8,7 @@ using PetsOwners.Repositories;
 using PetsOwners.Models;
 using PetsOwners.Models.ModelsView;
 using AutoMapper;
-
+using PetsOwners.RespondData;
 namespace PetsOwners.Controllers
 {
     public class OwnerController : ApiController
@@ -23,36 +23,25 @@ namespace PetsOwners.Controllers
         
         public OwnersRespondData Get(int page, int items,string filter)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Owner, OwnerView>()
-                .ForMember("PetsCount", opt => opt.MapFrom(c => c.Pets.Count())));
-            var ownCount = _repo.OwnersCount();
-            var countofpages = _repo.GetOwnerPageCount(items);
-            var data = _repo.GetOwners(page,items,filter);
-            var dataview = Mapper.Map<IEnumerable<Owner>, IEnumerable<OwnerView>>(data);
-            OwnersRespondData respond = new OwnersRespondData { countOfPages = countofpages,itemsOnPage = items, currentPage = page,ownersCount = ownCount , list = dataview};
+
+            OwnersRespondData respond = _repo.GetOwners(page, items, filter);
             return respond;
         }
         [HttpGet]
         public OwnersRespondData Find(string name,int page, int items,string filter)
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Owner, OwnerView>()
-                .ForMember("PetsCount", opt => opt.MapFrom(c => c.Pets.Count())));
-            var data = _repo.FindOwners(name, page, items,filter);
-            var countofpages = _repo.GetOwnerPageCount(data, items);
-           
-            var dataview = Mapper.Map<IEnumerable<Owner>, IEnumerable<OwnerView>>(data);
-            OwnersRespondData respond = new OwnersRespondData { countOfPages = countofpages, itemsOnPage = items, currentPage = page, list = dataview };
+            OwnersRespondData respond = _repo.FindOwners(name,page, items, filter);
             return respond;
         }
-        
-        public IHttpActionResult Put(Owner owner)
+        [HttpPost]
+        public IHttpActionResult Post(Owner owner)
         {
             if (owner == null)
                 return BadRequest();
             if (_repo.isOwnerNameExist(owner.Name))
                 if (owner.Id == 0)
-                    ModelState.AddModelError("Name", "Owner whith this name is exist");
-                else _repo.UpdateOwner(owner);
+                    ModelState.AddModelError("Name", "Owner whith this name exists");
+                //else _repo.UpdateOwner(owner);
             
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -60,10 +49,18 @@ namespace PetsOwners.Controllers
             _repo.AddOwner(owner);
             return Ok();
         }
-        
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-            
+            if (_repo.DeleteOwner(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                ModelState.AddModelError("id", "Owner whith this id does not exist");
+                return BadRequest(ModelState);
+            }
         }
 
 

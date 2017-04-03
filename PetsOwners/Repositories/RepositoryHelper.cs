@@ -56,5 +56,15 @@ namespace PetsOwners.Repositories
 
             return ownList.AsEnumerable();
         }
+        public static IEnumerable<T> OnPage<T>(this IEnumerable<T> d, int page, int itemsOnPage)
+            where T : class
+        {
+            d = d.Skip((page - 1) * itemsOnPage).Take(itemsOnPage);
+            return d;
+        }
+        public static int GetPageCount(int count, int itemsOnPage)
+        {
+            return (count - 1) / itemsOnPage + 1;
+        }
     }
 }

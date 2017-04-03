@@ -29,6 +29,7 @@ app.controller('ownersController', function ($scope, APIService, POHelperService
     
     reloadData();
     function reloadData() {
+        $scope.errors = null;
         if ($scope.ownerName == '' || $scope.ownerName ==null) getAll();
         else findAll();
     }
@@ -92,10 +93,10 @@ app.controller('ownersController', function ($scope, APIService, POHelperService
     }
     $scope.deleteOwner = function (id) {
         var servCall = APIService.deleteOwner(id);
-        servCall.then(function (error) {
+        servCall.then(function (success) { }, function (error) {
             $log.error('Oops! Something went wrong while fetching the data.')
-        })
-
+        });
+        reloadData();
     }
     $scope.filtering = function (name) {
         if ($scope.filter.split('-')[0] == name) {

@@ -4,28 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PetsOwners.Models;
-using PetsOwners.RespondData;
+using PetsOwners.RespondData; 
 namespace PetsOwners.Repositories
 {
     public interface IRepository
     {
        //Owners
         void AddOwner(Owner owner);
-        void UpdateOwner(Owner owner);
-
+        bool UpdateOwner(Owner id);
+        bool DeleteOwner(int id);
         bool isOwnerNameExist(string name);
-        Owner GetOwner(int id);
-        int GetOwnerPageCount(int itemsOnPageCount);
-        int GetOwnerPageCount(IEnumerable<Owner> owners, int itemsOnPageCount);
-        IEnumerable<OwnersRespondData> GetOwners();
 
-        IEnumerable<OwnersRespondData> GetOwners(int page, int items, string filter="Id-Down");
-        IEnumerable<OwnersRespondData> FindOwners(string name, int page, int items, string filter="Id-Down");
-        int OwnersCount();
+        OwnersRespondData GetOwners(int page, int items, string filter="Id-Down");
+        OwnersRespondData FindOwners(string name, int page, int items, string filter="Id-Down");
+        
 
         //Pets
         void AddPet(Pet owner);
-        void UpdatePet(Pet owner);
+        bool UpdatePet(Pet id);
+        bool DeletePet(int id);
 
         bool isPetNameExist(string name,int ownerId);
         Pet GetPet(int id);
